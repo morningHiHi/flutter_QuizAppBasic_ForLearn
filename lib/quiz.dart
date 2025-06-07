@@ -1,3 +1,4 @@
+import 'package:adv_basics/data/questions.dart';
 import 'package:adv_basics/question_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adv_basics/start_screen.dart';
@@ -16,10 +17,19 @@ class _QuizState extends State<Quiz> {
   List<String> selectedAnswer = [];
   var activeScreen = 'start-Screen';
 
+  //lưu câu trả lời của người dùng
   void onSelectedAnswers(String answer) {
     selectedAnswer.add(answer);
+    //print(answer);
+    if (selectedAnswer.length == question.length) {
+      setState(() {
+        activeScreen = 'start-Screen';
+        selectedAnswer.clear();
+      });
+    }
   }
 
+  //cập nhập đổi màn hình
   void switchScreen() {
     setState(() {
       activeScreen = 'question-Screen';
