@@ -17,6 +17,7 @@ class _QuizState extends State<Quiz> {
   //Widget? activeScreen ;
   List<String> selectedAnswer = [];
   String activeScreen = 'start-Screen';
+  String activeScreen = 'start-Screen';
 
   //lưu câu trả lời của người dùng
   void onSelectedAnswers(String answer) {
