@@ -16,7 +16,7 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   //Widget? activeScreen ;
   List<String> selectedAnswer = [];
-  var activeScreen = 'start-Screen';
+  String activeScreen = 'start-Screen';
 
   //lưu câu trả lời của người dùng
   void onSelectedAnswers(String answer) {
@@ -41,7 +41,7 @@ class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
     Widget screenWidget = StartScreen(switchScreen);
-    if (activeScreen != 'start-Screen') {
+    if (activeScreen == 'start-Screen') {
       screenWidget = QuestionScreen(onSelectedAnswers: onSelectedAnswers);
     }else if (activeScreen == 'result-screen'){
       screenWidget = ResultsScreen(chosenAnswers: selectedAnswer,);
