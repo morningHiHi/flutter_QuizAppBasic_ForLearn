@@ -17,7 +17,6 @@ class _QuizState extends State<Quiz> {
   //Widget? activeScreen ;
   List<String> selectedAnswer = [];
   String activeScreen = 'start-Screen';
-  String activeScreen = 'start-Screen';
 
   //lưu câu trả lời của người dùng
   void onSelectedAnswers(String answer) {
@@ -39,13 +38,20 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void restart(){
+    setState(() {
+      selectedAnswer.clear();
+      activeScreen = 'question-Screen';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget screenWidget = StartScreen(switchScreen);
     if (activeScreen == 'question-Screen') {
       screenWidget = QuestionScreen(onSelectedAnswers: onSelectedAnswers);
     }else if (activeScreen == 'result-screen'){
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswer,);
+      screenWidget = ResultsScreen(chosenAnswers: selectedAnswer,restartQuiz: restart,);
     }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
