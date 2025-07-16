@@ -5,7 +5,7 @@ import 'package:adv_basics/data/questions.dart';
 import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 
-var ran = Random();
+Random ran = Random();
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key, required this.onSelectedAnswers});
@@ -18,11 +18,14 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-  var currentQuestionIndex = 0;
+  int currentQuestionIndex = 0;
   void chagneCurrentQuestionIndex(String answer) {
-    widget.onSelectedAnswers(answer);
+    widget.onSelectedAnswers(
+      answer,
+    ); // gọi thực hiện một callback được định nghĩa ở Quiz.dart
     setState(() {
-      currentQuestionIndex = ran.nextInt(10) ;
+      //currentQuestionIndex = ran.nextInt(10);
+      currentQuestionIndex++;
     });
   }
 
@@ -54,9 +57,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
               return AnswersButton(
                 answers: item,
-                ontap: (){
+                ontap: () {
                   chagneCurrentQuestionIndex(item);
-                }
+                },
               );
             }),
 
