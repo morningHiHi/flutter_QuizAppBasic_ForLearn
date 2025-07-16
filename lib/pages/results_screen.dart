@@ -1,5 +1,6 @@
 import 'package:adv_basics/data/questions.dart';
 import 'package:flutter/material.dart';
+import 'package:adv_basics/pages/question_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen({super.key, required this.chosenAnswers});
@@ -9,10 +10,11 @@ class ResultsScreen extends StatelessWidget {
     List<Map<String, Object>> summary = [];
     int n = chosenAnswers.length;
     for (int i = 0; i < n; i++) {
-      summary.add({'question_index': i,
-      'question': question[i].text,
-      'correct-answer': question[i].anwsers[0],
-      'user-answer': chosenAnswers[i]
+      summary.add({
+        'question_index': i,
+        'question': question[i].text,
+        'correct-answer': question[i].anwsers[0],
+        'user-answer': chosenAnswers[i],
       });
     }
     return summary;
@@ -20,12 +22,28 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('you answered X out of Y question correctly!'),
-        SizedBox(height: 10),
-        TextButton(onPressed: () {}, child: Text('hello')),
-      ],
+    final summaryData = getSummaryData();
+    final int numTotalQuestions = question.length;
+    final int numCorrectQuestion = summaryData.where((data) {
+          return data['user_answer'] == data['correct_answer'];
+        }).length;
+    return SizedBox(
+      width: double.infinity,
+
+      child: Container(
+        margin: const EdgeInsets.all(40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('you answered $numCorrectQuestion out of $numTotalQuestions question correctly!'),
+            const SizedBox(height: 10),
+            QuestionSummary(summaryData: getSummaryData()),
+            Text('List of answers and question...'),
+            //SizedBox(height: 10),
+            //TextButton(onPressed: () {}, child: Text('hello')),
+          ],
+        ),
+      ),
     );
   }
 }
