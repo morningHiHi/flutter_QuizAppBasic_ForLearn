@@ -4,7 +4,7 @@ import 'package:adv_basics/pages/question_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen({super.key, required this.chosenAnswers});
-  final List<String> chosenAnswers;
+  final List<String> chosenAnswers ;
 
   List<Map<String, Object>> getSummaryData() {
     List<Map<String, Object>> summary = [];
@@ -25,7 +25,7 @@ class ResultsScreen extends StatelessWidget {
     final summaryData = getSummaryData();
     final int numTotalQuestions = question.length;
     final int numCorrectQuestion = summaryData.where((data) {
-          return data['user_answer'] == data['correct_answer'];
+          return data['user-answer'] == data['correct-answer'];
         }).length;
     return SizedBox(
       width: double.infinity,
@@ -40,7 +40,7 @@ class ResultsScreen extends StatelessWidget {
             QuestionSummary(summaryData: getSummaryData()),
             Text('List of answers and question...'),
             //SizedBox(height: 10),
-            //TextButton(onPressed: () {}, child: Text('hello')),
+            TextButton(onPressed: () {}, child: Text('hello')),
           ],
         ),
       ),
